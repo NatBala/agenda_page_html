@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisor Meeting Agenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Add required libraries for direct PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="print-controls no-print">
+        <button class="btn btn-success" onclick="generatePDF()">Save as PDF</button>
+        <p class="small text-muted mt-2">When print dialog appears, select "Save as PDF" as the destination</p>
+    </div>
+    <div class="container page-container" id="agendaContainer">
+        <!-- Content will be loaded dynamically from data.json -->
+        <div class="text-center mt-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading agenda data...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load and render the agenda data
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAgendaData();
+        });
+
+        // Function to load the JSON data and populate the agenda
+        async function loadAgendaData() {
+            try {
+                // Fetch the JSON data
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Failed to load agenda data');
+                
+                const data = await response.json();
+                
+                // Get container
+                const container = document.getElementById('agendaContainer');
+                container.innerHTML = ''; // Clear loading message
+                
+                // Build HTML from the JSON data
+                const html = `
+                    <!-- Header -->
+                    <header class="mt-2 mb-3">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="firm-details">
+                                    <p class="fw-bold mb-0" id="firm-name">${data.header.firmName}</p>
+                                    <p class="mb-0" id="firm-address">${data.header.firmAddress}</p>
+                                    <p class="mb-1" id="agenda-date">${data.header.date}</p>
+                                </div>
+                            </div>
+                            <div class="col-3 text-end">
+                                <div class="internal-use mb-2 text-danger">${data.header.internalUseText}</div>
+                                <img src="images/capital-group-logo.png" alt="Capital Group Logo" class="logo-img">
+                            </div>
+                        </div>
+                        <hr class="divider my-2">
+                    </header>
+
+                    <!-- Thank You Note -->
+                    <div class="thank-you mb-3">
+                        <p class="mb-2">${data.greeting}</p>
+                    </div>
+
+                    <!-- Capital Group Assets -->
+                    <div class="capital-assets mb-4">
+                        <p class="section-title text-primary fw-bold mb-0">${data.assets.title} <span class="text-body">(in millions of USD)</span></p>
+                        <p class="small text-secondary mb-3">As of <span id="assets-date">${data.assets.dateAsOf}</span></p>
+                        
+                        <!-- 3-column grid version - visible in both screen and print -->
+                        <div class="print-only-grid">
+                            <div class="assets-grid">
+                                <!-- Column 1: AUM -->
+                                <div class="assets-column aum">
+                                    <h4>${data.assets.financialData.aum.title}</h4>
+                                    ${data.assets.financialData.aum.items.map(item => `
+                                        <div class="data-item">
+                                            <div class="label">${item.label}</div>
+                                            <div class="bar-container"><div class="bar" style="width: ${item.percentage}%;"></div></div>
+                                            <div class="value">${item.value}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <!-- Column 2: Asset Mix -->
+                                <div class="assets-column asset-mix">
+                                    <h4>${data.assets.financialData.assetMix.title}</h4>
+                                    ${data.assets.financialData.assetMix.items.map(item => `
+                                        <div class="data-item">
+                                            <div class="label">${item.label}</div>
+                                            <div class="bar-container"><div class="bar" style="width: ${item.percentage}%;"></div></div>
+                                            <div class="value">${item.value}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <!-- Column 3: Morningstar Ownership -->
+                                <div class="assets-column morningstar">
+                                    <h4>${data.assets.financialData.morningstarOwnership.title}</h4>
+                                    ${data.assets.financialData.morningstarOwnership.items.map(item => `
+                                        <div class="data-item">
+                                            <div class="label">${item.label}</div>
+                                            <div class="bar-container"><div class="bar" style="width: ${item.percentage}%;"></div></div>
+                                            <div class="value">${item.value}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div class="sales-grid mt-4">
+                                <!-- Column 1: Sales -->
+                                <div class="sales-column">
+                                    <h4>${data.assets.financialData.sales.title}</h4>
+                                    ${data.assets.financialData.sales.items.map(item => `
+                                        <div class="data-item">
+                                            <div class="label">${item.label}</div>
+                                            <div class="bar-container"><div class="bar" style="width: ${item.percentage}%;"></div></div>
+                                            <div class="value">${item.value}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <!-- Column 2: YTD Vehicle Sales -->
+                                <div class="sales-column">
+                                    <h4>${data.assets.financialData.ytdVehicleSales.title}</h4>
+                                    ${data.assets.financialData.ytdVehicleSales.items.map(item => `
+                                        <div class="data-item">
+                                            <div class="label">${item.label}</div>
+                                            <div class="bar-container"><div class="bar" style="width: ${item.percentage}%;"></div></div>
+                                            <div class="value">${item.value}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <!-- Column 3: Top Funds -->
+                                <div class="sales-column">
+                                    <h4>${data.assets.financialData.topFunds.title}</h4>
+                                    ${data.assets.financialData.topFunds.items.map(item => `
+                                        <div class="data-item">
+                                            <div class="label">${item.label}</div>
+                                            <div class="bar-container"><div class="bar" style="width: ${item.percentage}%;"></div></div>
+                                            <div class="value">${item.value}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="disclaimer text-muted fst-italic small mt-3">${data.assets.disclaimer}</p>
+                    </div>
+
+                    <!-- Topics for Discussion -->
+                    <div class="topics-discussion mb-4 p-3 bg-light rounded">
+                        <h5 class="mb-3">${data.topicsForDiscussion.title}</h5>
+                        <ol class="topic-list ps-4">
+                            ${data.topicsForDiscussion.topics.map((topic, index) => `
+                                <li>
+                                    <span class="fw-bold">${topic.title}</span>
+                                    <ul class="mt-1 mb-2">
+                                        ${topic.items.map(item => `
+                                            <li id="${item.id}">
+                                                ${item.text}
+                                                ${item.link ? ` (<a href="${item.link}" class="topic-link">click here</a>)` : ''}
+                                                ${item.fundCode ? ` (<a href="#" class="fund-link">${item.fundCode}</a>)` : ''}
+                                            </li>
+                                        `).join('')}
+                                    </ul>
+                                </li>
+                            `).join('')}
+                        </ol>
+                    </div>
+
+                    <!-- What's on your mind -->
+                    <div class="notes-section bg-light p-3 rounded mb-4">
+                        <h5 class="mb-2">${data.notes.title}</h5>
+                        <textarea id="notes-area" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <!-- Your Team -->
+                    <div class="team-section mb-4">
+                        <h5 class="text-primary mb-3">${data.team.title}</h5>
+                        <div class="row g-3">
+                            <!-- Team Member Layout -->
+                            <div class="d-flex justify-content-between align-items-start w-100">
+                                <!-- Team Members on the left -->
+                                <div class="d-flex flex-column gap-3" style="width: 85%;">
+                                    ${data.team.members.map(member => `
+                                        <div class="d-flex">
+                                            <img src="${member.image}" alt="${member.name}" class="team-photo me-3 rounded" width="60">
+                                            <div>
+                                                <p class="fw-bold mb-0">${member.name}</p>
+                                                <p class="mb-1">${member.title}</p>
+                                                <p class="contact-info mb-0"><a href="mailto:${member.email}">${member.email}</a></p>
+                                                ${member.phone ? `<p class="contact-info mb-0"><a href="tel:+1${member.phone.replace(/[^0-9]/g,'')}">${member.phone}</a></p>` : ''}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                
+                                <!-- Schedule Call on the right -->
+                                <div class="schedule-call-container" style="width: 15%;">
+                                    <img src="${data.team.schedule.qrCodeImage}" alt="QR Code" width="50" class="d-block mx-auto mb-1">
+                                    <a href="${data.team.schedule.link}" class="small text-primary d-block">${data.team.schedule.text}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Disclaimer -->
+                    <footer class="mt-4 pt-2 border-top">
+                        <p class="small text-muted mb-1">${data.footer.disclaimer1}</p>
+                        <p class="small text-muted mb-0">${data.footer.disclaimer2}</p>
+                    </footer>
+                `;
+                
+                // Set the HTML
+                container.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading agenda data:', error);
+                document.getElementById('agendaContainer').innerHTML = 
+                    `<div class="alert alert-danger mt-5">Error loading agenda data: ${error.message}</div>`;
+            }
+        }
+
+        // Function to generate PDF
+        function generatePDF() {
+            // Hide the buttons before printing
+            const controlsElement = document.querySelector('.print-controls');
+            controlsElement.style.display = 'none';
+            
+            // Set a timeout to ensure the UI updates before printing
+            setTimeout(() => {
+                // Print the page (browser will offer Save as PDF option)
+                window.print();
+                
+                // Show the controls again after printing
+                setTimeout(() => {
+                    controlsElement.style.display = 'block';
+                }, 1000);
+            }, 100);
+        }
+    </script>
+</body>
+</html> 

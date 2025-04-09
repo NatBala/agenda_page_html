@@ -1,0 +1,1181 @@
+/* Custom styles to complement Bootstrap */
+:root {
+  --primary-color: #007bff;
+  --primary-dark: #0056b3;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+.page-container {
+  max-width: 210mm;
+  padding: 8mm;
+  margin: 8mm auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+/* Header styling */
+.logo-img {
+  max-height: 40px;
+  width: auto;
+}
+
+/* Financial Data Layout */
+.financial-data .section-block {
+  margin-bottom: 20px;
+}
+
+.section-block h6 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Data Row Layout */
+.data-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Right align everything */
+  margin-bottom: 6px;
+  position: relative;
+  min-height: 22px;
+}
+
+.data-row .label {
+  flex: 0 0 auto;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #333;
+  margin-right: auto; /* Push to left */
+  padding: 0;
+  text-align: left;
+}
+
+.data-row .value {
+  flex: 0 0 auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 0.9em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.data-row .bar-container {
+  flex: 0 0 150px; /* Fixed width for bars */
+  height: 10px;
+  background-color: transparent; /* Remove gray background */
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.data-row .bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Apply the same styles to data-item for consistency */
+.data-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 90px; /* Increase width for bar and value columns */
+  align-items: center;
+  margin-bottom: 4px;
+  position: relative;
+  min-height: 22px;
+  gap: 10px; /* Increase gap between columns */
+}
+
+.data-item .label {
+  flex: 0 0 auto;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #333;
+  margin-right: auto;
+  padding: 0;
+  text-align: left;
+  grid-column: 1;
+}
+
+.data-item .value {
+  flex: 0 0 auto;
+  margin-left: 0; /* Remove left margin since we're using grid gap */
+  margin-right: 0; /* Remove right margin since we're using grid gap */
+  font-weight: bold;
+  font-size: 0.9em;
+  white-space: nowrap;
+  text-align: right;
+  grid-column: 3;
+}
+
+.data-item .bar-container {
+  flex: 0 0 150px;
+  height: 10px;
+  background-color: transparent; /* Remove gray background */
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  grid-column: 2;
+  width: 100%; /* Fill the grid cell */
+}
+
+.data-item .bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Grid layout styling */
+.assets-grid, .sales-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.assets-column, .sales-column {
+  min-width: 0;
+}
+
+.assets-column h4, .sales-column h4 {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding-bottom: 3px;
+}
+
+/* Topics for Discussion */
+.topics-discussion {
+  background-color: #f7f5f2;
+  padding: 8px 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.topics-discussion h5 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.topic-list {
+  padding-left: 10px;
+}
+
+.topic-list > li {
+  margin-bottom: 8px;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.topic-list ul {
+  padding-left: 25px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.topic-list ul li {
+  font-size: 1em;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+/* Notes Section */
+.notes-section {
+  margin-bottom: 15px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+.notes-section h5 {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.notes-section textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  font-family: inherit;
+  font-size: 0.95em;
+  box-sizing: border-box;
+  resize: vertical;
+  background-color: #fff;
+  height: 45px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Team Section */
+.team-section {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 0;
+}
+
+.team-section h5 {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Improve team layout with more space */
+.team-section .d-flex {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.team-section .d-flex:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Improved team photo styling */
+.team-section img.team-photo {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 12px;
+}
+
+/* Better contact info styling */
+.team-section .contact-info {
+  margin-bottom: 4px !important;
+  font-size: 0.9em;
+  color: #007bff;
+}
+
+.team-section .contact-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.team-section .contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* Improve team member name and title */
+.team-section .fw-bold {
+  font-size: 1.1em;
+  margin-bottom: 3px;
+}
+
+.team-section .mb-1 {
+  color: #555;
+  margin-bottom: 8px !important;
+}
+
+/* Schedule call section improvements */
+.schedule-call-container {
+  padding: 10px;
+  text-align: center;
+  border-left: none;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.schedule-call-container img {
+  margin-bottom: 8px;
+}
+
+.schedule-call-container a.small {
+  font-size: 0.9em;
+  display: block;
+  margin-top: 5px;
+}
+
+/* QR code alignment */
+.qr-code {
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+/* Print specific styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 0.3cm; /* Reduce page margins */
+  }
+  
+  body {
+    font-size: 9pt; /* Smaller base font size */
+  }
+  
+  .page-container {
+    width: 100%;
+    max-width: none;
+    padding: 0.3cm; /* Reduce padding */
+    margin: 0;
+    box-shadow: none;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Hide screen-only content */
+  .screen-only {
+    display: none !important;
+  }
+  
+  /* Print-only grid layout */
+  .print-only-grid {
+    display: block !important;
+  }
+  
+  .assets-grid, .sales-grid {
+    gap: 10px !important; /* Reduced gap between columns */
+    margin-bottom: 8px !important;
+  }
+  
+  .assets-column h4, .sales-column h4 {
+    font-size: 0.85em !important;
+    margin-bottom: 5px !important;
+    padding-bottom: 3px !important;
+  }
+  
+  .data-item {
+    margin-bottom: 3px !important; /* Less space between items */
+    gap: 2px !important;
+  }
+  
+  .data-item .label, .data-item .value {
+    font-size: 0.85em !important; /* Slightly smaller text */
+  }
+  
+  .data-item .bar-container {
+    height: 6px !important; /* Smaller bar height */
+    background-color: #e9ecef !important;
+    border-radius: 3px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  .data-item .bar {
+    height: 100% !important;
+    background-color: #007bff !important;
+    border-radius: 3px !important;
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  /* Reduce space after asset grid */
+  .assets-grid {
+    margin-bottom: 10px !important;
+  }
+  
+  /* Reduce spacing in disclaimer */
+  .disclaimer {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    font-size: 0.7em !important;
+  }
+  
+  /* Compress spacing in other sections */
+  .firm-details p, .thank-you p {
+    margin-bottom: 2px !important;
+  }
+  
+  hr.divider {
+    margin: 3px 0 !important;
+  }
+  
+  /* Make capital assets section more compact */
+  .capital-assets {
+    margin-bottom: 5px !important;
+  }
+  
+  .capital-assets .section-title {
+    margin-bottom: 3px !important;
+    font-size: 1em !important;
+  }
+  
+  .capital-assets .section-subtitle {
+    margin-bottom: 5px !important;
+    font-size: 0.8em !important;
+  }
+  
+  /* Topics styling for print */
+  .topics-discussion {
+    background-color: #f7f5f2 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Other print styling */
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+  
+  .contact-info, .schedule-call {
+    color: #000 !important;
+  }
+  
+  .internal-use {
+    color: #555 !important;
+  }
+  
+  /* Force fit everything on one page */
+  .page-container {
+    max-height: 26.7cm !important; /* A4 height minus margins */
+  }
+  
+  /* Further spacing adjustments */
+  .section-title, h5, h6 {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  
+  /* Reduce spacing in topics section */
+  .topics-discussion {
+    padding: 8px 10px !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .topics-discussion h5 {
+    font-size: 1.1rem !important;
+    margin-bottom: 6px !important;
+    font-weight: bold !important;
+  }
+  
+  .topic-list > li {
+    margin-bottom: 6px !important;
+    font-size: 1em !important;
+  }
+  
+  .topic-list ul {
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+  }
+  
+  .topic-list ul li {
+    margin-bottom: 3px !important;
+    font-size: 0.95em !important;
+  }
+  
+  /* Team section adjustments */
+  .team-section {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .team-section h5 {
+    margin-bottom: 5px !important;
+  }
+  
+  .team-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    gap: 5px !important;
+  }
+  
+  .team-member {
+    flex: 1 !important;
+    font-size: 0.8em !important;
+  }
+  
+  .team-photo {
+    width: 30px !important;
+    height: auto !important;
+  }
+  
+  /* Footer adjustments */
+  footer {
+    margin-top: 15px;
+    padding-top: 10px;
+  }
+  
+  footer p {
+    font-size: 0.7em !important;
+    margin-bottom: 5px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Global spacing */
+  .mb-1, .mb-2, .mb-3, .mb-4, .my-1, .my-2, .my-3, .my-4 {
+    margin-bottom: 5px !important;
+  }
+  
+  .mt-1, .mt-2, .mt-3, .mt-4, .my-1, .my-2, .my-3, .my-4 {
+    margin-top: 5px !important;
+  }
+  
+  .pb-1, .pb-2, .pb-3, .py-1, .py-2, .py-3 {
+    padding-bottom: 3px !important;
+  }
+  
+  .pt-1, .pt-2, .pt-3, .py-1, .py-2, .py-3 {
+    padding-top: 3px !important;
+  }
+  
+  /* Reduce what's on your mind section more aggressively */
+  .notes-section {
+    padding: 3px 6px !important;
+    margin-top: 3px !important;
+    margin-bottom: 3px !important;
+  }
+  
+  .notes-section h5 {
+    font-size: 0.9rem !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .notes-section textarea {
+    height: 25px !important;
+    min-height: 25px !important;
+    border: none !important;
+    padding: 3px !important;
+    background-color: #f7f5f2 !important;
+    resize: none !important;
+  }
+  
+  /* Team photos smaller in print */
+  .team-photo {
+    width: 25px !important;
+  }
+}
+
+/* Header Styles */
+.header {
+    margin-bottom: 10px;
+}
+
+.header-top {
+    text-align: right;
+    color: red;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 15px;
+}
+
+.firm-details p {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.firm-details #firm-name {
+    font-size: 1em;
+    color: #333;
+}
+
+.logo img {
+    max-height: 60px; /* Adjust as needed */
+    width: auto;
+}
+
+.divider {
+    margin: 5px 0;
+}
+
+/* Thank You Note */
+.thank-you p {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/* Capital Assets Section */
+.capital-assets {
+    margin-bottom: 15px;
+}
+
+.capital-assets .section-title {
+    font-size: 1.1em;
+    margin-bottom: 3px;
+    color: #005792; /* Blue color from logo */
+}
+
+.capital-assets .section-subtitle {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.assets-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); /* Prevent columns from overflowing */
+    gap: 15px; /* Slightly reduced gap */
+    font-size: 0.8em;
+}
+
+.assets-column h4 {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.data-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 80px 90px; /* Increased width for bar and value */
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 10px; /* Increased gap between elements */
+}
+
+.data-item .label {
+    grid-column: 1;
+    text-align: left;
+    padding-right: 3px;
+    overflow-wrap: break-word; /* Allow long words to break */
+    word-wrap: break-word;
+    word-break: normal; /* Don't break words unless needed */
+    hyphens: auto;
+    font-size: 0.9em;
+    line-height: 1.2;
+    min-width: 0; /* Allow text to shrink in grid */
+}
+
+.data-item .value {
+    text-align: right;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Bar Chart Styles */
+.bar-container {
+    width: 100%; /* Change from auto to 100% to ensure full width is used */
+    min-width: 30px;
+    height: 8px; /* Slightly smaller height */
+    background-color: transparent;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 4px;
+    flex: 1 1 auto; /* Simplified flex property */
+    display: block; /* Ensure it's a block element */
+}
+
+.bar {
+    height: 100%;
+    background-color: #007bff; /* Standard blue bar color */
+    border-radius: 3px;
+    display: block; /* Ensure display property is set */
+    min-width: 5px; /* Ensure very small values still show */
+}
+
+/* --- Column-Specific Layouts (using Flexbox) --- */
+
+/* Layout Type 1 (AUM & First Sales Column) */
+.aum .data-item .label,
+.sales-grid .sales-column:first-child .data-item .label {
+    flex: 0 0 auto; /* Do not grow, do not shrink, basis is auto */
+    margin-right: 5px; /* Space between label and value */
+}
+.aum .data-item .value,
+.sales-grid .sales-column:first-child .data-item .value {
+   flex: 0 0 auto; /* Do not grow, do not shrink, basis is auto */
+   padding-right: 5px; /* Keep space before bar */
+   text-align: right;
+}
+.aum .data-item .bar-container,
+.sales-grid .sales-column:first-child .data-item .bar-container {
+    flex: 1 1 auto; /* Grow, Shrink, Basis Auto */
+    margin: 0 0 0 5px; /* Margin only on left */
+}
+
+/* Layout Type 2 (Asset Mix, Morningstar, Other Sales) */
+.asset-mix .data-item,
+.morningstar .data-item,
+.sales-grid .sales-column:nth-child(n+2) .data-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 60px 60px; /* Match the new template */
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+.asset-mix .data-item .label,
+.morningstar .data-item .label,
+.sales-grid .sales-column:nth-child(n+2) .data-item .label {
+    /* Remove fixed width constraints */
+    text-align: left;
+    padding-right: 5px;
+    grid-column: 1;
+    /* Remove truncation rules */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+}
+
+.asset-mix .data-item .bar-container,
+.morningstar .data-item .bar-container,
+.sales-grid .sales-column:nth-child(n+2) .data-item .bar-container {
+    grid-column: 2;
+    width: 100%; /* Fill grid cell */
+    min-width: 50px;
+    max-width: none; /* Remove max-width constraint */
+    margin: 0; /* Remove margin as gap handles spacing */
+}
+
+.asset-mix .data-item .value,
+.morningstar .data-item .value,
+.sales-grid .sales-column:nth-child(n+2) .data-item .value {
+    grid-column: 3;
+    text-align: right;
+    white-space: nowrap;
+    justify-self: end; /* Align to end of cell */
+}
+
+/* Sales Section */
+.sales-section {
+    margin-bottom: 15px;
+    font-size: 0.85em; /* Match asset section */
+}
+
+.sales-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); /* Prevent columns from overflowing */
+    gap: 15px; /* Slightly reduced gap */
+    margin-bottom: 10px;
+}
+
+.sales-column h4 {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* Re-use data-item and bar styles from assets section */
+/* Minor adjustments might be needed if layout differs slightly */
+.sales-section .data-item {
+    /* grid-template-columns: auto 1fr auto; is set above */
+    align-items: center; /* Ensure parent rule is applied */
+}
+
+.disclaimer {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Topics for Discussion */
+.topic-list {
+    list-style-type: none; /* Remove default numbering */
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.topic-list > li {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.topic-list > li strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.topic-list ul {
+    list-style-type: disc; /* Use bullets for sub-items */
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.topic-list ul li {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #444;
+}
+
+.topic-list a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.topic-list a:hover {
+    text-decoration: underline;
+}
+
+/* Add numbering manually */
+.topic-list {
+    counter-reset: topic-counter;
+}
+
+.topic-list > li::before {
+    counter-increment: topic-counter;
+    content: counter(topic-counter) ". ";
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.topic-list > li > strong {
+    display: inline; /* Keep number and title on same line */
+}
+
+/* Your Team Section */
+.team-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.team-section h5 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.team-member {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.team-photo {
+    width: 50px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.team-info p {
+    margin: 0 0 3px 0;
+    line-height: 1.3;
+}
+
+.team-info strong {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.team-info .contact-info {
+    color: #007bff; /* Blue for email/phone */
+    font-size: 0.9em;
+}
+
+/* QR Code Specific Layout */
+.team-member-qr {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+}
+
+.team-member-qr > div:first-child {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    flex-basis: 60%; /* Adjust basis */
+}
+
+.qr-code-container {
+    text-align: center;
+    margin-top: 10px; /* Add space above QR */
+    flex-basis: 35%; /* Adjust basis */
+}
+
+.qr-code {
+    max-width: 60px; /* Adjust QR code size */
+    height: auto;
+    display: block;
+    margin: 0 auto 5px auto;
+}
+
+.schedule-call {
+    font-size: 0.9em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.schedule-call:hover {
+    text-decoration: underline;
+}
+
+
+/* Footer Disclaimer */
+.footer-disclaimer {
+    margin-top: 30px;
+    padding-top: 15px;
+    font-size: 0.8em;
+    color: #555;
+    line-height: 1.4;
+}
+
+.footer-disclaimer .divider {
+    margin-bottom: 15px;
+}
+
+.footer-disclaimer p {
+    margin: 0 0 5px 0;
+}
+
+
+/* Print-specific adjustments */
+@media print {
+    /* ... existing print styles ... */
+
+    .notes-section textarea {
+        border: none;
+        background-color: #f7f5f2; /* Match background on print */
+        resize: none;
+        height: auto; /* Allow content to determine height */
+        min-height: 40px !important;
+    }
+
+    .topics-discussion, .notes-section {
+        page-break-inside: avoid;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr 1fr 1fr; /* Force 3 columns for print */
+        gap: 15px;
+    }
+
+    .team-member {
+        page-break-inside: avoid;
+    }
+
+    a {
+        color: #000 !important; /* Black links for print */
+        text-decoration: none !important;
+    }
+
+    .contact-info, .schedule-call {
+         color: #000 !important; /* Ensure contact info is black */
+    }
+
+    .bar {
+         background-color: #007bff !important; /* Use original blue for print */
+         print-color-adjust: exact; /* Force printing of background color */
+         -webkit-print-color-adjust: exact; /* Safari/Chrome */
+    }
+
+    .bar-container {
+        print-color-adjust: exact; /* Also force container background */
+        -webkit-print-color-adjust: exact;
+    }
+
+    .internal-use {
+        color: #555 !important; /* Make internal use grey, not red */
+    }
+
+    /* Hide QR code or link if not printable/useful */
+    /* .qr-code-container { display: none; } */
+}
+
+/* Print Controls (Button) - Hidden on print via .no-print */
+.print-controls {
+    text-align: center;
+    padding: 15px 0;
+    margin-bottom: 10px; /* Space between button and page */
+}
+
+.print-controls button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* 3-Column Layout Grid (now used for both screen and print) */
+.print-only-grid {
+  display: block;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.assets-grid, .sales-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 15px;
+  font-size: 1em; /* Reset base font size */
+}
+
+.assets-column h4, .sales-column h4 {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.data-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 90px; /* Increased width for bar and value */
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 10px; /* Increased gap between elements */
+}
+
+.data-item .label {
+  grid-column: 1;
+  text-align: left;
+  padding-right: 3px;
+  overflow-wrap: normal; /* Let text flow naturally */
+  word-wrap: normal;
+  word-break: normal;
+  font-size: 0.9em; /* Consistent size */
+  font-weight: normal;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.data-item .bar-container {
+  grid-column: 2;
+  width: 100%;
+  height: 8px;
+  background-color: transparent;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+}
+
+.data-item .value {
+  grid-column: 3;
+  text-align: right;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 0.9em; /* Match label size */
+}
+
+.data-item .bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Override any conflicting font sizes from older styles */
+.asset-mix .data-item .label,
+.morningstar .data-item .label,
+.aum .data-item .label,
+.sales-grid .sales-column .data-item .label {
+  font-size: 0.9em !important;
+}
+
+.asset-mix .data-item .value,
+.morningstar .data-item .value,
+.aum .data-item .value,
+.sales-grid .sales-column .data-item .value {
+  font-size: 0.9em !important;
+}
+
+/* Override any conflicting styles from older layouts */
+.asset-mix .data-item,
+.morningstar .data-item,
+.sales-grid .sales-column:nth-child(n+2) .data-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 60px 60px; /* Match the new template */
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+/* Print specific styles still needed for color printing */
+@media print {
+  /* Hide screen-only content */
+  .screen-only {
+    display: none !important;
+  }
+  
+  /* Other print specific styles */
+  .data-item .bar-container {
+    background-color: #e9ecef !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  .data-item .bar {
+    background-color: #007bff !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}
+
+/* Topic list tweaks for better readability */
+.topic-list ul li {
+  font-size: 1em;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+/* Make sure notes section is visible when printing */
+@media print {
+  .notes-section {
+    display: block !important;
+    page-break-inside: avoid !important;
+    background-color: #f7f5f2 !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  
+  .notes-section textarea {
+    display: block !important;
+    height: 30px !important;
+    border: 1px solid #ddd !important;
+    background-color: #fff !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}
+
+/* Right-align schedule call */
+.schedule-call-container {
+  text-align: right;
+  margin-left: auto;
+}
+
+.capital-assets .mb-3 {
+  margin-bottom: 0.5rem !important;
+}
+
+.capital-assets .mb-4 {
+  margin-bottom: 1rem !important;
+} 

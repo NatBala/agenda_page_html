@@ -1,0 +1,133 @@
+{
+  "header": {
+    "firmName": "Palo Alto Wealth Management, LLC - Palo Alto, 94301",
+    "firmAddress": "525 University Ave, Suite 1400, Palo Alto, CA, 94301",
+    "date": "June 15, 2025",
+    "internalUseText": "For Internal use only"
+  },
+  "greeting": "Looking forward to our upcoming quarterly review. Here's a summary of key points for our discussion.",
+  "assets": {
+    "title": "Your Capital Group assets",
+    "dateAsOf": "May 2025",
+    "financialData": {
+      "aum": {
+        "title": "AUM",
+        "items": [
+          { "label": "Overall", "value": "$256.42M", "percentage": 90 }
+        ]
+      },
+      "assetMix": {
+        "title": "Asset Mix",
+        "items": [
+          { "label": "U.S. Equity", "value": "$143.60M", "percentage": 56 },
+          { "label": "International Equity", "value": "$61.54M", "percentage": 24 },
+          { "label": "Fixed Income", "value": "$38.46M", "percentage": 15 },
+          { "label": "Alternative Assets", "value": "$12.82M", "percentage": 5 }
+        ]
+      },
+      "morningstarOwnership": {
+        "title": "Morningstar Ownership",
+        "items": [
+          { "label": "Large Growth", "value": "$92.31M", "percentage": 36 },
+          { "label": "Large Blend", "value": "$64.10M", "percentage": 25 },
+          { "label": "Foreign Large Growth", "value": "$41.03M", "percentage": 16 },
+          { "label": "Intermediate Core Bond", "value": "$33.33M", "percentage": 13 }
+        ]
+      },
+      "sales": {
+        "title": "Sales",
+        "items": [
+          { "label": "LY Sales", "value": "$82.05M", "percentage": 32 },
+          { "label": "YTD Sales", "value": "$30.77M", "percentage": 12 }
+        ]
+      },
+      "ytdVehicleSales": {
+        "title": "YTD Vehicle Sales",
+        "items": [
+          { "label": "American Funds", "value": "$25.64M", "percentage": 10 }
+        ]
+      },
+      "topFunds": {
+        "title": "Top Funds - YTD Sales",
+        "items": [
+          { "label": "AMCAP", "value": "$10.26M", "percentage": 40 },
+          { "label": "New Perspective", "value": "$7.69M", "percentage": 30 },
+          { "label": "New World", "value": "$5.13M", "percentage": 20 },
+          { "label": "Bond Fund of America", "value": "$2.56M", "percentage": 10 }
+        ]
+      }
+    },
+    "disclaimer": "May not accurately reflect all assets and sales due to reporting variables. Source: Capital Group."
+  },
+  "topicsForDiscussion": {
+    "title": "Topics for discussion",
+    "topics": [
+      {
+        "title": "Market Outlook and Strategy",
+        "items": [
+          { "text": "Geopolitical tensions and market impact assessment", "link": "#", "id": "topic-1-1" },
+          { "text": "Interest rate policy changes and investment positioning", "link": "#", "id": "topic-1-2" }
+        ]
+      },
+      {
+        "title": "Portfolio Adjustments",
+        "items": [
+          { "text": "Increasing allocation to international markets", "link": "#", "id": "topic-2-1" },
+          { "text": "ESG integration strategies for long-term growth", "id": "topic-2-2" }
+        ]
+      },
+      {
+        "title": "Tax Planning",
+        "items": [
+          { "text": "Year-end tax loss harvesting opportunities", "id": "topic-3-1" },
+          { "text": "Charitable giving options to maximize impact", "link": "#", "id": "topic-3-2" }
+        ]
+      },
+      {
+        "title": "Funds for discussion:",
+        "items": [
+          { "text": "AMCAP Fund", "fundCode": "AMCPX", "id": "topic-4-1" },
+          { "text": "New Perspective Fund", "fundCode": "NPFFX", "id": "topic-4-2" }
+        ]
+      }
+    ]
+  },
+  "notes": {
+    "title": "What's on your mind?"
+  },
+  "team": {
+    "title": "Your team",
+    "members": [
+      {
+        "name": "Jennifer Chen",
+        "title": "Senior Relationship Manager",
+        "email": "jennifer_chen@capgroup.com",
+        "phone": "(650) 555-1234",
+        "image": "images/brandon-ma.png"
+      },
+      {
+        "name": "Michael Rodriguez",
+        "title": "Portfolio Specialist",
+        "email": "michael_rodriguez@capgroup.com",
+        "phone": "(650) 555-2345",
+        "image": "images/rebecca-south.png"
+      },
+      {
+        "name": "Sarah Johnson",
+        "title": "Client Services Coordinator",
+        "email": "sarah_johnson@capgroup.com",
+        "phone": "(650) 555-3456",
+        "image": "images/becky-manning.png"
+      }
+    ],
+    "schedule": {
+      "qrCodeImage": "images/qr-code.png",
+      "text": "Schedule a call",
+      "link": "#"
+    }
+  },
+  "footer": {
+    "disclaimer1": "Investments are not FDIC-insured, nor are they deposits of or guaranteed by a bank or any other entity, so they may lose value.",
+    "disclaimer2": "For institutional investors and financial professionals only. Not for use with the public."
+  }
+} 
