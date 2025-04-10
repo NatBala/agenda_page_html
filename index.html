@@ -3,305 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advisor Meeting Agenda</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Meeting Agenda - Capital Group</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Add required libraries for direct PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div class="print-controls no-print">
-        <button class="btn btn-success" onclick="generatePDF()">Save as PDF</button>
-        <p class="small text-muted mt-2">When print dialog appears, select "Save as PDF" as the destination</p>
-    </div>
-    <div class="container page-container" id="agendaContainer">
-        <!-- Content will be loaded dynamically from data.json -->
-        <div class="text-center mt-5">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
+    <div class="page-container">
+
+        <header class="header">
+            <div class="header-top">
+                 <span class="internal-use">For Internal use only</span>
             </div>
-            <p>Loading agenda data...</p>
-        </div>
-    </div>
+            <div class="header-main">
+                <div class="address-date">
+                    <p class="recipient"><strong>Sand Hill Global Advisors, LLC - San Francisco, 94111</strong></p>
+                    <p class="recipient-address">4 Embarcadero Ctr Ste 3150, #, San Francisco, CA, 94111</p>
+                    <p class="date">April 9, 2025</p>
+                </div>
+                <div class="logo">
+                    <img src="capital_group_logo_standard.png" alt="Capital Group Logo"> <!-- UPDATE PATH -->
+                </div>
+            </div>
+        </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Load and render the agenda data
-        document.addEventListener('DOMContentLoaded', function() {
-            loadAgendaData();
-        });
+        <section class="greeting">
+            <p>Thank you for your continued trust in us. We look forward to our next meeting.</p>
+        </section>
 
-        // Function to find the highest percentage in an array of items
-        function findMaxPercentage(items) {
-            let max = 0;
-            for (const item of items) {
-                if (item.percentage > max) {
-                    max = item.percentage;
-                }
-            }
-            return max === 0 ? 1 : max; // Avoid division by zero
-        }
+        <section class="data-section">
+            <h2 class="data-main-heading">Your Capital Group Assets <span class="sub-heading">(in millions of USD, as of March 2025)</span></h2>
 
-        // Function to scale percentages relative to the highest value
-        function scalePercentages(items) {
-            const maxPercentage = findMaxPercentage(items);
-            return items.map(item => {
-                return {
-                    ...item,
-                    scaledPercentage: (item.percentage / maxPercentage) * 100
-                };
-            });
-        }
+            <div class="data-grid top-grid">
+                <div class="data-column aum-column">
+                    <h3>AUM</h3>
+                    <div class="data-item"><span>Overall</span><span class="value">$138.74M</span></div>
+                    <div class="bar-chart-container"><div class="bar" style="width: 85%;"></div></div>
+                </div>
+                <div class="data-column asset-mix-column">
+                    <h3>Asset Mix</h3>
+                    <div class="data-item"><span>Municipal Bond</span><span class="value">$133.67M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 90%;"></div></div>
+                    <div class="data-item"><span>International Equity</span><span class="value">$2.78M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 15%;"></div></div>
+                    <div class="data-item"><span>U.S. Equity</span><span class="value">$1.87M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 10%;"></div></div>
+                    <div class="data-item"><span>Others</span><span class="value">$0.42M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 5%;"></div></div>
+                </div>
+                <div class="data-column morningstar-column">
+                     <h3>Morningstar Ownership</h3>
+                    <div class="data-item"><span>Muni California Long</span><span class="value">$96.16M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 80%;"></div></div>
+                    <div class="data-item"><span>Muni National Interm</span><span class="value">$37.51M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 40%;"></div></div>
+                    <div class="data-item"><span>Global Large-Stock</span><span class="value">—</span></div>
+                    <div class="bar-chart-container small-bar"></div>
+                    <div class="data-item"><span>Growth</span><span class="value">$1.50M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 8%;"></div></div>
+                </div>
+            </div>
 
-        // Function to load the JSON data and populate the agenda
-        async function loadAgendaData() {
-            try {
-                // Fetch the JSON data
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error('Failed to load agenda data');
-                
-                const data = await response.json();
-                
-                // Scale percentages for each category
-                const scaledData = {
-                    ...data,
-                    assets: {
-                        ...data.assets,
-                        financialData: {
-                            aum: {
-                                ...data.assets.financialData.aum,
-                                items: scalePercentages(data.assets.financialData.aum.items)
-                            },
-                            assetMix: {
-                                ...data.assets.financialData.assetMix,
-                                items: scalePercentages(data.assets.financialData.assetMix.items)
-                            },
-                            morningstarOwnership: {
-                                ...data.assets.financialData.morningstarOwnership,
-                                items: scalePercentages(data.assets.financialData.morningstarOwnership.items)
-                            },
-                            sales: {
-                                ...data.assets.financialData.sales,
-                                items: scalePercentages(data.assets.financialData.sales.items)
-                            },
-                            ytdVehicleSales: {
-                                ...data.assets.financialData.ytdVehicleSales,
-                                items: scalePercentages(data.assets.financialData.ytdVehicleSales.items)
-                            },
-                            topFunds: {
-                                ...data.assets.financialData.topFunds,
-                                items: scalePercentages(data.assets.financialData.topFunds.items)
-                            }
-                        }
-                    }
-                };
-                
-                // Get container
-                const container = document.getElementById('agendaContainer');
-                container.innerHTML = ''; // Clear loading message
-                
-                // Build HTML from the JSON data with scaled percentages
-                const html = `
-                    <!-- Header -->
-                    <header class="mt-2 mb-3">
-                        <div class="row">
-                            <div class="col-9">
-                                <div class="firm-details">
-                                    <p class="fw-bold mb-0" id="firm-name">${scaledData.header.firmName}</p>
-                                    <p class="mb-0" id="firm-address">${scaledData.header.firmAddress}</p>
-                                    <p class="mb-1" id="agenda-date">${scaledData.header.date}</p>
-                                </div>
-                            </div>
-                            <div class="col-3 text-end">
-                                <div class="internal-use mb-2 text-danger">${scaledData.header.internalUseText}</div>
-                                <img src="images/capital-group-logo.png" alt="Capital Group Logo" class="logo-img">
-                            </div>
-                        </div>
-                        <hr class="divider my-2">
-                    </header>
+            <div class="data-grid bottom-grid">
+                 <div class="data-column sales-column">
+                    <h3>Sales</h3>
+                    <div class="data-item"><span>LY Sales</span><span class="value">$64.73M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 75%;"></div></div>
+                    <div class="data-item"><span>YTD Sales</span><span class="value">$3.18M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 10%;"></div></div>
+                </div>
+                 <div class="data-column ytd-vehicle-column">
+                    <h3>YTD Vehicle Sales</h3>
+                    <div class="data-item"><span>American Funds</span><span class="value">$3.18M</span></div>
+                    <div class="bar-chart-container small-bar"><div class="bar" style="width: 15%;"></div></div>
+                 </div>
+                 <div class="data-column top-funds-column">
+                    <h3>Top Funds - YTD Sales</h3>
+                     <div class="data-item"><span>TEFCA</span><span class="value">$2.85M</span></div>
+                     <div class="bar-chart-container tiny-bar"><div class="bar" style="width: 15%;"></div></div>
+                    <div class="data-item"><span>TEBF</span><span class="value">$0.33M</span></div>
+                     <div class="bar-chart-container tiny-bar"><div class="bar" style="width: 5%;"></div></div>
+                    <div class="data-item"><span>AMF</span><span class="value">$0.00M</span></div>
+                     <div class="bar-chart-container tiny-bar"><div class="bar" style="width: 0%;"></div></div>
+                    <div class="data-item"><span>AMBAL</span><span class="value">$0.00M</span></div>
+                     <div class="bar-chart-container tiny-bar"><div class="bar" style="width: 0%;"></div></div>
+                 </div>
+            </div>
+        </section>
 
-                    <!-- Thank You Note -->
-                    <div class="thank-you mb-3">
-                        <p class="mb-2">${scaledData.greeting}</p>
-                    </div>
+        <section class="disclaimer-source">
+             <p>May not accurately reflect all assets and sales due to reporting variables. Source: Capital Group.</p>
+        </section>
 
-                    <!-- Capital Group Assets -->
-                    <div class="capital-assets mb-2">
-                        <p class="section-title text-primary fw-bold mb-0">${scaledData.assets.title} <span class="text-body">(in millions of USD)</span></p>
-                        <p class="small text-secondary mb-2">As of <span id="assets-date">${scaledData.assets.dateAsOf}</span></p>
-                        
-                        <!-- 3-column grid version - visible in both screen and print -->
-                        <div class="print-only-grid">
-                            <div class="assets-grid mb-2">
-                                <!-- Column 1: AUM -->
-                                <div class="assets-column aum">
-                                    <h4>${scaledData.assets.financialData.aum.title}</h4>
-                                    ${scaledData.assets.financialData.aum.items.map(item => `
-                                        <div class="data-item">
-                                            <div class="label">${item.label}</div>
-                                            <div class="bar-container"><div class="bar" style="width: ${item.scaledPercentage}%;"></div></div>
-                                            <div class="value">${item.value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                
-                                <!-- Column 2: Asset Mix -->
-                                <div class="assets-column asset-mix">
-                                    <h4>${scaledData.assets.financialData.assetMix.title}</h4>
-                                    ${scaledData.assets.financialData.assetMix.items.map(item => `
-                                        <div class="data-item">
-                                            <div class="label">${item.label}</div>
-                                            <div class="bar-container"><div class="bar" style="width: ${item.scaledPercentage}%;"></div></div>
-                                            <div class="value">${item.value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                
-                                <!-- Column 3: Morningstar Ownership -->
-                                <div class="assets-column morningstar">
-                                    <h4>${scaledData.assets.financialData.morningstarOwnership.title}</h4>
-                                    ${scaledData.assets.financialData.morningstarOwnership.items.map(item => `
-                                        <div class="data-item">
-                                            <div class="label">${item.label}</div>
-                                            <div class="bar-container"><div class="bar" style="width: ${item.scaledPercentage}%;"></div></div>
-                                            <div class="value">${item.value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                            
-                            <div class="sales-grid">
-                                <!-- Column 1: Sales -->
-                                <div class="sales-column">
-                                    <h4>${scaledData.assets.financialData.sales.title}</h4>
-                                    ${scaledData.assets.financialData.sales.items.map(item => `
-                                        <div class="data-item">
-                                            <div class="label">${item.label}</div>
-                                            <div class="bar-container"><div class="bar" style="width: ${item.scaledPercentage}%;"></div></div>
-                                            <div class="value">${item.value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                
-                                <!-- Column 2: YTD Vehicle Sales -->
-                                <div class="sales-column">
-                                    <h4>${scaledData.assets.financialData.ytdVehicleSales.title}</h4>
-                                    ${scaledData.assets.financialData.ytdVehicleSales.items.map(item => `
-                                        <div class="data-item">
-                                            <div class="label">${item.label}</div>
-                                            <div class="bar-container"><div class="bar" style="width: ${item.scaledPercentage}%;"></div></div>
-                                            <div class="value">${item.value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                
-                                <!-- Column 3: Top Funds -->
-                                <div class="sales-column">
-                                    <h4>${scaledData.assets.financialData.topFunds.title}</h4>
-                                    ${scaledData.assets.financialData.topFunds.items.map(item => `
-                                        <div class="data-item">
-                                            <div class="label">${item.label}</div>
-                                            <div class="bar-container"><div class="bar" style="width: ${item.scaledPercentage}%;"></div></div>
-                                            <div class="value">${item.value}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </div>
+        <section class="topics-section">
+            <h2>Topics for Discussion</h2>
+            <div class="topic-item">
+                <p class="topic-header"><strong>1. Investment Practice Excellence</strong></p>
+                <ul>
+                    <li>Municipal bond investing: Key to infrastructure and steady income (<a href="#">learn more</a>)</li>
+                    <li>Portfolio construction insights transform registered investment advisors (<a href="#">learn more</a>)</li>
+                </ul>
+            </div>
+             <div class="topic-item">
+                <p class="topic-header"><strong>2. Practice Management</strong></p>
+                 <ul>
+                    <li>Comprehensive support boosts elite RIA firms (<a href="#">learn more</a>)</li>
+                    <li>Master the art of acquiring the ideal client</li>
+                </ul>
+            </div>
+              <div class="topic-item">
+                <p class="topic-header"><strong>3. Wealth Planning Insights</strong></p>
+                 <ul>
+                    <li>Deepen client engagement to become the advisor of choice</li>
+                    <li>Investing internationally in a changing world (<a href="#">learn more</a>)</li>
+                </ul>
+            </div>
+               <div class="topic-item">
+                <p class="topic-header"><strong>4. Funds for Discussion:</strong></p>
+                 <ul>
+                    <li>The Investment Company of America (ICAFX)</li>
+                    <li>Washington Mutual Investors Fund (WMFFX)</li>
+                </ul>
+            </div>
+        </section>
 
-                        <p class="disclaimer text-muted fst-italic small mt-2">${scaledData.assets.disclaimer}</p>
-                    </div>
+        <section class="notes-section">
+             <h2>What's on Your Mind?</h2>
+             <div class="notes-box"></div>
+        </section>
 
-                    <!-- Topics for Discussion -->
-                    <div class="topics-discussion mb-2 p-3 bg-light rounded">
-                        <h5 class="mb-2">${scaledData.topicsForDiscussion.title}</h5>
-                        <ol class="topic-list ps-4 mb-1">
-                            ${scaledData.topicsForDiscussion.topics.map((topic, index) => `
-                                <li>
-                                    <span class="fw-bold">${topic.title}</span>
-                                    <ul class="mt-1 mb-1">
-                                        ${topic.items.map(item => `
-                                            <li id="${item.id}">
-                                                ${item.text}
-                                                ${item.link ? ` (<a href="${item.link}" class="topic-link">click here</a>)` : ''}
-                                                ${item.fundCode ? ` (<a href="#" class="fund-link">${item.fundCode}</a>)` : ''}
-                                            </li>
-                                        `).join('')}
-                                    </ul>
-                                </li>
-                            `).join('')}
-                        </ol>
-                    </div>
+        <hr class="section-divider">
 
-                    <!-- What's on your mind -->
-                    <div class="notes-section bg-light p-2 rounded mb-2">
-                        <h5 class="mb-1">${scaledData.notes.title}</h5>
-                        <textarea id="notes-area" class="form-control" rows="2"></textarea>
-                    </div>
+        <section class="team-section">
+            <h2>Your Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="placeholder_male.png" alt="Brandon Ma"> <!-- UPDATE PATH -->
+                    <p class="name"><strong>Brandon Ma</strong></p>
+                    <p class="title">Relationship Manager</p>
+                    <p class="email"><a href="mailto:brandon.ma@capgroup.com">brandon.ma@capgroup.com</a></p>
+                    <p class="phone">(123) 456-7890</p>
+                </div>
+                 <div class="team-member schedule-section">
+                    <img src="placeholder_qr.png" alt="QR Code for Scheduling" class="qr-code"> <!-- UPDATE PATH -->
+                    <a href="#" class="schedule-link">Schedule a call</a>
+                </div>
+                 <div class="team-member">
+                     <img src="placeholder_female1.png" alt="Rebecca Smith"> <!-- UPDATE PATH -->
+                     <p class="name"><strong>Rebecca Smith</strong></p>
+                     <p class="title">Relationship Specialist</p>
+                    <p class="email"><a href="mailto:rebecca.smith@capgroup.com">rebecca.smith@capgroup.com</a></p>
+                 </div>
+                <div class="team-member">
+                    <img src="placeholder_female2.png" alt="Becky Manning"> <!-- UPDATE PATH -->
+                     <p class="name"><strong>Becky Manning</strong></p>
+                     <p class="title">Sales Support Coordinator</p>
+                     <p class="email"><a href="mailto:becky.manning@capgroup.com">becky.manning@capgroup.com</a></p>
+                    <p class="phone">(987) 654-3210</p>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Your Team -->
-                    <div class="team-section mb-3">
-                        <h5 class="text-primary mb-2">${scaledData.team.title}</h5>
-                        <div class="row g-2">
-                            <!-- Team Members - left side -->
-                            <div class="col-9">
-                                ${scaledData.team.members.map((member, index) => `
-                                    <div class="d-flex align-items-start ${index < scaledData.team.members.length - 1 ? 'mb-2' : ''}">
-                                        <img src="${member.image}" alt="${member.name}" class="team-photo">
-                                        <div>
-                                            <p class="fw-bold mb-0">${member.name}</p>
-                                            <p class="mb-1">${member.title}</p>
-                                            <p class="contact-info mb-0"><a href="mailto:${member.email}">${member.email}</a></p>
-                                            ${member.phone ? `<p class="contact-info mb-0"><a href="tel:+1${member.phone.replace(/\D/g,'')}">${member.phone}</a></p>` : ''}
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            
-                            <!-- Schedule Call - right side -->
-                            <div class="col-3">
-                                <div class="schedule-call-container h-100">
-                                    <img src="${scaledData.team.schedule.qrCodeImage}" alt="QR Code" width="60" class="qr-code mb-2">
-                                    <a href="${scaledData.team.schedule.link}" class="small text-primary">${scaledData.team.schedule.text}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="spacer"></div>
 
-                    <!-- Footer Disclaimer -->
-                    <footer class="mt-4 pt-2 border-top">
-                        <p class="small text-muted mb-1">${scaledData.footer.disclaimer1}</p>
-                        <p class="small text-muted mb-0">${scaledData.footer.disclaimer2}</p>
-                    </footer>
-                `;
-                
-                // Set the HTML
-                container.innerHTML = html;
-            } catch (error) {
-                console.error('Error loading agenda data:', error);
-                document.getElementById('agendaContainer').innerHTML = 
-                    `<div class="alert alert-danger mt-5">Error loading agenda data: ${error.message}</div>`;
-            }
-        }
+        <footer class="footer">
+            <p>Investments are not FDIC-insured, nor are they deposits of or guaranteed by a bank or any other entity, so they may lose value.</p>
+            <p>For institutional investors and financial professionals only. Not for use with the public.</p>
+        </footer>
 
-        // Function to generate PDF
-        function generatePDF() {
-            // Hide the buttons before printing
-            const controlsElement = document.querySelector('.print-controls');
-            controlsElement.style.display = 'none';
-            
-            // Set a timeout to ensure the UI updates before printing
-            setTimeout(() => {
-                // Print the page (browser will offer Save as PDF option)
-                window.print();
-                
-                // Show the controls again after printing
-                setTimeout(() => {
-                    controlsElement.style.display = 'block';
-                }, 1000);
-            }, 100);
-        }
-    </script>
+    </div> <!-- /page-container -->
 </body>
-</html> 
+</html>
